@@ -1,4 +1,22 @@
-Node* insert(Node* root, int Key)
+
+/*https://practice.geeksforgeeks.org/problems/insert-a-node-in-a-bst/1 
+ The structure of a BST node is as follows:
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+
+*/
+
+// The function returns the root of the BST (currently rooted at 'root') 
+// after inserting a new Node with value 'Key' into it. Node* insert(Node* root, int Key)
 {
     Node* temp = NULL;
     Node* x = root;
