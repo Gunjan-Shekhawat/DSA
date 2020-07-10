@@ -109,4 +109,48 @@ void topView(struct Node *root)
     cout<<(i->second).first<<" ";
 }
 
-
+// OR 
+void topView(struct Node* root) 
+{ 
+    // Base case 
+    if (root == NULL) { 
+        return; 
+    } 
+  
+    // Take a temporary node 
+    Node* temp = NULL; 
+  
+    // Queue to do BFS 
+    queue<pair<Node*, int> > q; 
+  
+    // map to store node at each vartical distance 
+    map<int, int> mp; 
+  
+    q.push({ root, 0 }); 
+  
+    // BFS 
+    while (!q.empty()) { 
+  
+        temp = q.front().first; 
+        int d = q.front().second; 
+        q.pop(); 
+  
+        // If any node is not at that vertical distance 
+        // just insert that node in map and print it 
+        if (mp.find(d) == mp.end()) { 
+            cout << temp->data << " "; 
+            mp[d] = temp->data; 
+        } 
+  
+        // Continue for left node 
+        if (temp->left) { 
+            q.push({ temp->left, d - 1 }); 
+        } 
+  
+        // Continue for right node 
+        if (temp->right) { 
+            q.push({ temp->right, d + 1 }); 
+        } 
+    } 
+} 
+  
