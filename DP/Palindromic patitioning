@@ -1,0 +1,54 @@
+/*
+Given a string, a partitioning of the string is a palindrome partitioning if every sub-string of the partition is a palindrome. 
+For example, “aba|b|bbabb|a|b|aba” is a palindrome partitioning of “ababbbabbababa”. 
+Determine the fewest cuts needed for palindrome partitioning of a given string. For example, minimum 3 cuts are needed for “ababbbabbababa”.
+The three cuts are “a|babbbab|b|ababa”.
+*/
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int dp[1501][1501];
+int paldp[1501][1501];
+bool ispalindrome(string s,int i,int j)
+{
+    if (i >= j) return true;
+    if (paldp[i][j] != -1) 
+    return paldp[i][j];
+    if (s[i] == s[j]) 
+    return paldp[i][j] = ispalindrome(s, i + 1, j - 1);
+    return paldp[i][j] = false;
+}
+int solve(string s,int i,int j)
+{
+    if(i>=j)
+    return dp[i][j]=0;
+    if(dp[i][j]!=-1)
+    return dp[i][j];
+    if(ispalindrome(s,i,j))
+    return dp[i][j]=0;
+    dp[i][j] = INT_MAX;
+    for(int k=i;k<=j;k++)
+    {
+        if(ispalindrome(s, i, k))
+        dp[i][j] = min(solve(s,i,k)+solve(s,k+1,j)+1,dp[i][j]);
+    }
+    return dp[i][j];
+}
+int main() {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    string s;
+	    cin>>s;
+	    int n = s.size();
+	    memset(dp,-1,sizeof(dp));
+	    memset(paldp,-1,sizeof(paldp));
+	    if(n==1)
+	    cout<<0<<endl;
+	    else
+	    cout<<solve(s,0,n-1)<<endl;
+	}
+	return 0;
+}
