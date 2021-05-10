@@ -80,6 +80,25 @@ int main()
 
     return 0;
 }
+/*
+                                    # method 2
+                for(int i=0;i<heights.size();i++){
+                while(!st.empty() && heights[st.top()]>heights[i]){
+                    //here we are checking if stack is empty or if we encounter 
+                    any 
+                    // number that doesn't satisfy our stack filling property
+                    int top=heights[st.top()];
+                    st.pop();
+                    int ran=st.empty()?-1:st.top();
+                    //this is to check if stack is empty, if so we will just take the                 //index
+                    ans=max(ans,top*(i-ran-1));
+                    // this is just to take the max area covered so far
+                }
+                st.push(i);
+                //we push into the stack as long as it satsifies our stack condition
+            }
+            return ans;
+*/
 
 vector<string> split_string(string input_string) {
     string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
