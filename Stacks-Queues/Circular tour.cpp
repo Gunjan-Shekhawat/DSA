@@ -20,6 +20,30 @@ where truck can make a circular tour is
 2nd petrol pump. Output in this case is 1
 (index of 2nd petrol pump).
 */
+int tour(petrolPump p[],int n)
+    {
+       int total = 0;
+       for(int i=0;i<n;i++)
+       {
+           total += p[i].petrol-p[i].distance;
+       }
+       if(total<0)
+       return -1;
+       
+       int start = 0;
+       int tank = 0;
+       for(int i=0;i<n;i++)
+       {
+           tank += p[i].petrol-p[i].distance;
+           if(tank<0)
+           {
+               start = i+1;
+               tank = 0;
+           }
+       }
+       return start;
+    }
+/*
 int tour(petrolPump arr[],int n)
 {
     int start = 0;  
@@ -42,3 +66,4 @@ int tour(petrolPump arr[],int n)
     }
     return start;  
 } 
+*/
